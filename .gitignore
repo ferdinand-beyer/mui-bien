@@ -1,0 +1,6 @@
+# IDEs
+.lsp/
+
+# Leiningen
+target/
+pom.xml
