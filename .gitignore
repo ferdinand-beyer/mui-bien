@@ -1,6 +1,5 @@
-# IDEs
-.lsp/
-
-# Leiningen
-target/
-pom.xml
+/.calva/
+/.lsp/
+/.cpcache/
+*.jar
+*.local
