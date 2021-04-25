@@ -26,13 +26,9 @@ jobs:
 
       - name: Build Jar
         run: clojure -X:jar
-
-  deploy:
-    if: ${{ startsWith(github.ref, 'refs/tags/') }}
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
+      
       - name: Deploy Jar
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
         run: clojure -X:deploy
         env:
           CLOJARS_USERNAME: fbeyer
