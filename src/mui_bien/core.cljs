@@ -10,7 +10,9 @@
    ["@material-ui/core/Button" :as button]
    ["@material-ui/core/ButtonBase" :as button-base]
 
+   ["@material-ui/core/Card" :as card]
    ["@material-ui/core/Chip" :as chip]
+   ["@material-ui/core/CircularProgress" :as circular-progress]
    ["@material-ui/core/CssBaseline" :as css-baseline]
 
    ["@material-ui/core/Dialog" :as dialog]
@@ -121,7 +123,9 @@
 (def button (r/adapt-react-class button/default))
 (def button-base (r/adapt-react-class button-base/default))
 
+(def card (r/adapt-react-class card/default))
 (def chip (r/adapt-react-class chip/default))
+(def circular-progress (r/adapt-react-class circular-progress/default))
 (def css-baseline (r/adapt-react-class css-baseline/default))
 
 (def dialog (r/adapt-react-class dialog/default))
