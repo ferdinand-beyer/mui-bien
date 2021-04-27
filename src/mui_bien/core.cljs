@@ -22,6 +22,7 @@
    ["@material-ui/core/DialogTitle" :as dialog-title]
 
    ["@material-ui/core/Fab" :as fab]
+   ["@material-ui/core/FormControlLabel" :as FormControlLabel]
 
    ["@material-ui/core/Grid" :as grid]
 
@@ -135,6 +136,12 @@
 (def dialog-title (r/adapt-react-class dialog-title/default))
 
 (def fab (r/adapt-react-class fab/default))
+
+(def -form-control-label (r/adapt-react-class FormControlLabel/default))
+
+(defn form-control-label [{:keys [control] :as props}]
+  [-form-control-label
+   (assoc props :control (r/as-element control))])
 
 (def grid (r/adapt-react-class grid/default))
 
