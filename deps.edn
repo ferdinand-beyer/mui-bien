@@ -1,10 +1,12 @@
-{:paths ["src"]
+{:paths ["src" "build/src"]
  :deps {org.clojure/clojure {:mvn/version "1.10.3"}
         org.clojure/clojurescript {:mvn/version "1.10.773"}
         reagent/reagent {:mvn/version "1.0.0"}}
 
  :aliases
- {:test {:extra-paths ["test"]
+ {:dev {:extra-paths ["dev"]}
+
+  :test {:extra-paths ["test"]
          :extra-deps {org.clojure/test.check {:mvn/version "1.1.0"}}}
   
   :runner
@@ -14,6 +16,11 @@
    :main-opts ["-m" "cognitect.test-runner"
                "-d" "test"]}
   
+  :gen {:extra-paths ["gen"]
+        :extra-deps {camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}}
+        :exec-fn mui-bien.gen/generate
+        :exec-args {:src-dir "src"}}
+
   :jar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.211"}}
         :exec-fn hf.depstar/jar
         :exec-args {:jar "mui-bien.jar" :sync-pom true}}

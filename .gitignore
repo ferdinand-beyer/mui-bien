@@ -1,5 +1,6 @@
 /.calva/
 /.lsp/
 /.cpcache/
+/build/
 *.jar
 *.local
