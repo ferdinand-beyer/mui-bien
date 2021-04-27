@@ -2,8 +2,6 @@ name: Clojure CI
 
 on:
   push:
-    branches:
-      - main
     tags:
       - 'v*'
 
@@ -24,7 +22,12 @@ jobs:
         with:
           cli: 1.10.3.822
 
+      - name: Generate Sources
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
+        run: clojure -X:gen
+
       - name: Build Jar
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
         run: clojure -X:jar
       
       - name: Deploy Jar
