@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.clojars.fbeyer</groupId>
   <artifactId>mui-bien</artifactId>
-  <version>0.2.0-SNAPSHOT</version>
+  <version>0.2.0</version>
   <name>mui-bien</name>
   <description>Lightweight integration library for Material UI and Reagent.</description>
   <url>https://github.com/ferdinand-beyer/mui-bien</url>
@@ -22,7 +22,7 @@
     <url>https://github.com/ferdinand-beyer/mui-bien</url>
     <connection>scm:git:git://github.com/ferdinand-beyer/mui-bien.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/ferdinand-beyer/mui-bien.git</developerConnection>
-    <tag>main</tag>
+    <tag>v0.2.0</tag>
   </scm>
   <build>
     <sourceDirectory>src</sourceDirectory>
