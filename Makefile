@@ -47,16 +47,18 @@ demo: gen
 dev: gen
 	clojure -M:dev:test:shadow-cljs watch demo test
 
-ifdef VERSION
 .PHONY: release
 release:
+ifdef VERSION
 	clojure -X:jar :version '"$(VERSION)"'
+else
+	$(error Required variable VERSION is not set for target `$@')
 endif
 
 $(GEN_TARGET): modules.edn $(GEN_SRC)
 	clojure -X:gen
 
-$(TEST_TARGET): $(SRC) $(TEST_SRC)
+$(TEST_TARGET): $(SRC) $(TEST_SRC) $(GEN_TARGET)
 	clojure -M:test:shadow-cljs compile node-test
 
 $(JAR): $(SRC) $(GEN_TARGET)
