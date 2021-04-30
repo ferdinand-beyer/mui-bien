@@ -30,6 +30,10 @@ clean:
 install: jar
 	clojure -X:install
 
+.PHONY: demo
+demo: gen
+	clojure -M:shadow-cljs watch demo
+
 $(GENERATED):
 	clojure -X:gen
 

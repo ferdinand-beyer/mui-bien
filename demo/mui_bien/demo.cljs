@@ -5,7 +5,9 @@
             [goog.events :as events]
             [goog.history.EventType :as EventType]
             [reagent.dom :as rdom]
-            [reagent.core :as r]))
+            [reagent.core :as r]
+            
+            [mui-bien.demo.index :refer [index-page]]))
 
 (enable-console-print!)
 
@@ -23,31 +25,17 @@
   (secretary/set-config! :prefix "#")
 
   (defroute "/" []
-    (swap! app-state assoc :page :home))
-
-  (defroute "/about" []
-    (swap! app-state assoc :page :about))
+    (swap! app-state assoc :page :index))
 
   (hook-browser-navigation!))
-
-(defn home []
-  [:div [:h1 "Home Page"]
-   [:a {:href "#/about"} "about page"]])
-
-(defn about []
-  [:div [:h1 "About Page"]
-   [:a {:href "#/"} "home page"]])
 
 (defmulti current-page #(@app-state :page))
 
 (defmethod current-page :default []
   [:h1 "Not found"])
 
-(defmethod current-page :home []
-  [home])
-
-(defmethod current-page :about []
-  [about])
+(defmethod current-page :index []
+  [index-page])
 
 (defn render []
   (rdom/render [current-page]
