@@ -1,9 +1,13 @@
-/.calva/
-/.lsp/
-/.cpcache/
+.cache/
+.calva/
+.cpcache/
+.lsp/
+
+*.local
+
 /build/
 *.jar
-*.local
+
 .shadow-cljs/
 node_modules/
 package.json
