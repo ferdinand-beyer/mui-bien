@@ -22,7 +22,7 @@
     <url>https://github.com/ferdinand-beyer/mui-bien</url>
     <connection>scm:git:git://github.com/ferdinand-beyer/mui-bien.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/ferdinand-beyer/mui-bien.git</developerConnection>
-    <tag>main</tag>
+    <tag>v0.3.0-SNAPSHOT</tag>
   </scm>
   <build>
     <sourceDirectory>src</sourceDirectory>
@@ -40,4 +40,21 @@
       <url>https://clojars.org/repo</url>
     </repository>
   </distributionManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>clojure</artifactId>
+      <version>1.10.3</version>
+    </dependency>
+    <dependency>
+      <groupId>reagent</groupId>
+      <artifactId>reagent</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>camel-snake-kebab</groupId>
+      <artifactId>camel-snake-kebab</artifactId>
+      <version>0.4.2</version>
+    </dependency>
+  </dependencies>
 </project>
