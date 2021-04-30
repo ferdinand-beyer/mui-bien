@@ -47,6 +47,12 @@ demo: gen
 dev: gen
 	clojure -M:dev:test:shadow-cljs watch demo test
 
+ifdef VERSION
+.PHONY: release
+release:
+	clojure -X:jar :version '"$(VERSION)"'
+endif
+
 $(GEN_TARGET): modules.edn $(GEN_SRC)
 	clojure -X:gen
 
