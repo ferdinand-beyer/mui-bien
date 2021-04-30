@@ -1,0 +1,7 @@
+{:deps {:aliases [:shadow-cljs]}
+ :dev-http {8090 {:roots ["build/demo/public" "classpath:public"]}}
+ :builds
+ {:demo {:target :browser
+         :output-dir "build/demo/public/js"
+         :asset-path "/js"
+         :modules {:main {:init-fn mui-bien.demo/init}}}}}
