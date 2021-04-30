@@ -6,18 +6,27 @@ MAKEFLAGS += --no-builtin-rules --warn-undefined-variables
 .ONESHELL:
 .DELETE_ON_ERROR:
 
-BUILD_DIR := build
+SRC := $(shell find src -type f -name "*.clj[sc]")
+TEST_SRC := $(shell find test -type f -name "*.clj[sc]")
+GEN_SRC := $(shell find gen -type f -name "*.clj")
+
 JAR := mui-bien.jar
-GENERATED := $(BUILD_DIR)/src/mui_bien/core/all.cljs
+BUILD_DIR := build
+GEN_TARGET := $(BUILD_DIR)/src/mui_bien/core/all.cljs
+TEST_TARGET := $(BUILD_DIR)/test/node/run-tests.js
 
 .PHONY: all
-all:
+all: jar
 
 .PHONY: build
-build: gen jar
+build: jar
 
 .PHONY: gen
-gen: $(GENERATED)
+gen: $(GEN_TARGET)
+
+.PHONY: test
+test: $(TEST_TARGET)
+	node $(TEST_TARGET)
 
 .PHONY: jar
 jar: $(JAR)
@@ -34,8 +43,15 @@ install: jar
 demo: gen
 	clojure -M:shadow-cljs watch demo
 
-$(GENERATED):
+.PHONY: dev
+dev: gen
+	clojure -M:dev:test:shadow-cljs watch demo test
+
+$(GEN_TARGET): modules.edn $(GEN_SRC)
 	clojure -X:gen
 
-$(JAR): $(GENERATED)
+$(TEST_TARGET): $(SRC) $(TEST_SRC)
+	clojure -M:test:shadow-cljs compile node-test
+
+$(JAR): $(SRC) $(GEN_TARGET)
 	clojure -X:jar
