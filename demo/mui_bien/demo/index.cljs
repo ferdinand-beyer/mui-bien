@@ -15,8 +15,8 @@
 (defn my-app-bar []
   (r/with-let
     [use-styles (make-styles
-                 (fn [theme]
-                   {:menu-button {:margin-right (.spacing theme 2)}
+                 (fn [{:keys [spacing]}]
+                   {:menu-button {:margin-right (spacing 2)}
                     :title {:flex-grow 1}}))]
     (let [classes (use-styles)]
       [app-bar {:position :static}
@@ -34,7 +34,18 @@
 (defn access-theme []
   (let [theme (use-theme)]
     [typography
-     (str "Theme type: " (.. theme -palette -type))]))
+     (str "Theme type: " (get-in theme [:palette :type]))]))
+
+(defn adapting-based-on-props []
+  (r/with-let
+    [use-styles (make-styles {:foo (fn [props]
+                                     {:background-color (props :background-color)})
+                              :bar {:color #(:color %)}})]
+   (let [props {:background-color "black"
+                :color "white"}
+         classes (use-styles props)]
+     [:div {:class (map classes [:foo :bar])}
+      "Styling based on props."])))
 
 (def theme (create-mui-theme
             {:palette {:type :dark}}
@@ -46,4 +57,5 @@
    [theme-provider {:theme theme}
     [css-baseline]
     [:f> my-app-bar]
-    [:f> access-theme]]])
+    [:f> access-theme]
+    [:f> adapting-based-on-props]]])

@@ -1,8 +1,8 @@
 (ns mui-bien.core.styles
-  (:require
-   [reagent.core :as r]
-   [mui-bien.interop :refer [decorate]]
-   ["@material-ui/core/styles" :as mui-styles]))
+  (:require [clojure.walk :refer [postwalk]]
+            [reagent.core :as r]
+            [mui-bien.interop :refer [decorate map->obj obj->map obj->map->obj]]
+            ["@material-ui/core/styles" :as mui-styles]))
 
 ;;;; Theming
 ;;
@@ -14,18 +14,23 @@
 
 (defn create-mui-theme
   "Creates a theme from one or more options maps.  Returns a JavaScript
-   object suitable to be passed to a theme-provider."
+   object suitable to be passed to a theme-provider, as this is the
+   most typical use-case."
   [opts & more]
-  (apply mui-styles/createMuiTheme (clj->js opts) (map clj->js more)))
+  (apply mui-styles/createMuiTheme (map->obj opts) (map map->obj more)))
 
 (defn use-theme
-  "This hook returns the theme object."
+  "This hook returns the theme object as a map."
   []
-  (mui-styles/useTheme))
+  (obj->map (mui-styles/useTheme)))
 
 ;;;; Styles
 ;;
 ;; API: https://material-ui.com/styles/api/
+
+(defn- styles-map->obj [m]
+  (map->obj
+   (postwalk #(cond-> % (fn? %) (obj->map->obj)) m)))
 
 (defn as-styles
   "Creates a styles JavaScript object or function from its ClojureScript
@@ -35,19 +40,16 @@
    a map.  Every item will generate a CSS class, identifyable in the
    component by the key.
 
-   Note that the theme passed to a styles function will be a JavaScript
-   object, not a ClojureScript map.
-
    Supports nested selectors and embedded functions to access the
    component's props, as described here:
    https://material-ui.com/styles/basics/"
   [styles]
-  ;; TODO: Wrap functions to pass props as cljs maps?
   (if (fn? styles)
-    ;; Transform theme?
     (fn [theme]
-      (clj->js (styles theme)))
-    (clj->js styles)))
+      (-> (obj->map theme)
+          (styles)
+          (styles-map->obj)))
+    (styles-map->obj styles)))
 
 (defn make-styles
   "Returns a React Hook (a function) from a styles description as supported
@@ -56,8 +58,8 @@
   ([styles]
    (make-styles styles nil))
   ([styles options]
-   (comp #(js->clj % :keywordize-keys true)
-         (mui-styles/makeStyles (as-styles styles) (clj->js options)))))
+   (comp obj->map
+         (mui-styles/makeStyles (as-styles styles) (map->obj options)))))
 
 (defn with-styles
   "DEPRECATED.  Use make-style hook instead.

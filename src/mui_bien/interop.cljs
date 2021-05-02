@@ -17,3 +17,11 @@
 
 (defn obj->map [obj]
   (transform-keys ->kebab-case-keyword (js->clj obj)))
+
+(defn obj->map->obj
+  "Returns a function that takes a JavaScript object, calls f
+   with that object converted to a map, then converts the result
+   back to a JavaScript object."
+  [f]
+  (fn [obj]
+    (-> (obj->map obj) (f) (map->obj))))
