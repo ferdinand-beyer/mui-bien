@@ -41,7 +41,7 @@ install: jar
 
 .PHONY: demo
 demo: gen
-	clojure -M:shadow-cljs watch demo
+	-clojure -M:shadow-cljs watch demo
 
 .PHONY: dev
 dev: gen
@@ -55,7 +55,7 @@ else
 	$(error Required variable VERSION is not set for target `$@')
 endif
 
-$(GEN_TARGET): modules.edn $(GEN_SRC)
+$(GEN_TARGET): mui.edn $(GEN_SRC)
 	clojure -X:gen
 
 $(TEST_TARGET): $(SRC) $(TEST_SRC) $(GEN_TARGET)

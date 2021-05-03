@@ -5,7 +5,7 @@
             [mui-bien.core.icon-button :refer [icon-button]]
             [mui-bien.core.toolbar :refer [toolbar]]
             [mui-bien.core.typography :refer [typography]]
-            [mui-bien.icons.menu :rename {menu menu-icon}]
+            [mui-bien.icons.menu :refer [menu-icon]]
 
             [mui-bien.core.colors :refer [color]]
             [mui-bien.core.styles :refer [make-styles use-theme create-mui-theme theme-provider]]
