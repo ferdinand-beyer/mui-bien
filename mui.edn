@@ -5659,4 +5659,28 @@
 
  {:package lab
   :components
-  [Autocomplete]}]
+  [Alert
+   AlertTitle
+   Autocomplete
+   AvatarGroup
+   Pagination
+   PaginationItem
+   Rating
+   Skeleton
+   SpeedDial
+   SpeedDialAction
+   SpeedDialIcon
+   TabContext
+   TabList
+   TabPanel
+   Timeline
+   TimelineConnector
+   TimelineContent
+   TimelineDot
+   TimelineItem
+   TimelineOppositeContent
+   TimelineSeparator
+   ToggleButton
+   ToggleButtonGroup
+   TreeItem
+   TreeView]}]
