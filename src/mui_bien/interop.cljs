@@ -25,3 +25,13 @@
   [f]
   (fn [obj]
     (-> (obj->map obj) (f) (map->obj))))
+
+(defn wrap-element-props
+  "Wraps props that require element values with as-element."
+  [props wrap-key?]
+  (reduce (fn [props [k v]]
+            (if (wrap-key? k)
+              (assoc props k (r/as-element v))
+              props))
+          {}
+          props))
