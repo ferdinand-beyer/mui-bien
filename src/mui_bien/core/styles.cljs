@@ -86,3 +86,5 @@
 
 (def emphasize mui-styles/emphasize)
 (def fade mui-styles/fade)
+(def darken mui-styles/darken)
+(def lighten mui-styles/lighten)
