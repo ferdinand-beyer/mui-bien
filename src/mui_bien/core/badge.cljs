@@ -4,5 +4,8 @@
 
 (def -badge (r/adapt-react-class Badge/default))
 
-(defn badge [{:keys [badge-content] :as props}]
-  [-badge (assoc props :badge-content (r/as-element badge-content))])
+(defn badge [{:keys [badge-content] :as props} node]
+  [-badge
+   (assoc props
+          :badge-content (r/as-element badge-content))
+   node])
