@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.clojars.fbeyer</groupId>
+  <groupId>com.fbeyer</groupId>
   <artifactId>mui-bien</artifactId>
-  <version>0.3.0</version>
+  <version>0.3.1</version>
   <name>mui-bien</name>
   <description>Lightweight integration library for Material UI and Reagent.</description>
   <url>https://github.com/ferdinand-beyer/mui-bien</url>
@@ -22,7 +22,7 @@
     <url>https://github.com/ferdinand-beyer/mui-bien</url>
     <connection>scm:git:git://github.com/ferdinand-beyer/mui-bien.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/ferdinand-beyer/mui-bien.git</developerConnection>
-    <tag>v0.3.0</tag>
+    <tag>v0.3.1</tag>
   </scm>
   <build>
     <sourceDirectory>src</sourceDirectory>
