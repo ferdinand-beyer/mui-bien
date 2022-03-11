@@ -1,5 +1,7 @@
-{:npm-deps {"react" "^17.0.2"
-            "react-dom" "^17.0.2"
-            "@material-ui/core" "^4.11.4"
-            "@material-ui/icons" "^4.11.2"
-            "@material-ui/lab" "^4.0.0-alpha.58"}}
+{:npm-deps {"@emotion/react" "^11.8.2",
+            "@emotion/styled" "^11.8.1",
+            "@mui/material" "^5.5.0",
+            "@mui/styles" "^5.5.0",
+            "create-react-class" "15.6.3",
+            "react" "^17.0.2",
+            "react-dom" "^17.0.2"}}

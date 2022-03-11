@@ -2,13 +2,13 @@
 .calva/
 .cpcache/
 .lsp/
+.portal/
 
-*.local
+*.log
 
 /build/
+/target/
 *.jar
 
 .shadow-cljs/
 node_modules/
-package.json
-package-lock.json

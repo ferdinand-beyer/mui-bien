@@ -39,13 +39,9 @@ clean:
 install: jar
 	clojure -X:install
 
-.PHONY: demo
-demo: gen
-	-clojure -M:shadow-cljs watch demo
-
 .PHONY: dev
-dev: gen
-	clojure -M:dev:test:shadow-cljs watch demo test
+dev: #gen
+	clojure -M:dev:test:shadow-cljs watch devcards test
 
 .PHONY: release
 release:
