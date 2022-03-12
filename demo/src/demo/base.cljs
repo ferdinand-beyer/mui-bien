@@ -47,8 +47,10 @@
    [list-item-text {:primary text}]])
 
 (defn- menu []
-  [list {:component :nav}
+  [list {:component :nav
+         :dense true}
    [menu-subheader "Inputs"]
+   [menu-item :autocomplete "Autocomplete"]
    [menu-item :buttons "Button"]
    [menu-item :text-fields "Text Field"]])
 

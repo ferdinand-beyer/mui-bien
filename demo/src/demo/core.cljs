@@ -1,5 +1,6 @@
 (ns demo.core
-  (:require [demo.components.buttons]
+  (:require [demo.components.autocomplete]
+            [demo.components.buttons]
             [demo.components.text-fields]
             [demo.home]
             [demo.base :as base]
@@ -14,6 +15,8 @@
         :view demo.home/screen}]
 
    ["components"
+    ["/autocomplete" {:name :autocomplete
+                      :view demo.components.autocomplete/screen}]
     ["/buttons" {:name :buttons
                  :view demo.components.buttons/screen}]
     ["/text-fields" {:name :text-fields

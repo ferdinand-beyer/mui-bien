@@ -44,7 +44,7 @@ dev: gen
 	clojure -M:demo:test:shadow-cljs watch demo test
 
 # TODO: This requires 'npm install' after shadow-cljs has created 'package.json'
-$(GEN_TARGET): $(GEN_SRC)
+$(GEN_TARGET): $(BUILD_SRC)
 	clojure -T:build generate
 
 $(TEST_TARGET): $(SRC) $(TEST_SRC) $(GEN_TARGET)
