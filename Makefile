@@ -8,12 +8,12 @@ MAKEFLAGS += --no-builtin-rules --warn-undefined-variables
 
 SRC := $(shell find src -type f -name "*.clj[sc]")
 TEST_SRC := $(shell find test -type f -name "*.clj[sc]")
-GEN_SRC := $(shell find gen -type f -name "*.clj")
+BUILD_SRC := build.clj $(shell find build -type f -name "*.clj")
 
 JAR := mui-bien.jar
-BUILD_DIR := build
-GEN_TARGET := $(BUILD_DIR)/src/mui_bien/core/all.cljs
-TEST_TARGET := $(BUILD_DIR)/test/node/run-tests.js
+TARGET_DIR := target
+GEN_TARGET := $(TARGET_DIR)/src-gen/mui_bien/material/all.cljs
+TEST_TARGET := $(TARGET_DIR)/test/node/run-tests.js
 
 .PHONY: all
 all: jar
@@ -33,29 +33,22 @@ jar: $(JAR)
 
 .PHONY: clean
 clean:
-	-rm -rf $(BUILD_DIR) $(JAR)
+	-rm -rf $(TARGET_DIR)
 
 .PHONY: install
 install: jar
-	clojure -X:install
+	clojure -T:build install
 
 .PHONY: dev
-dev: #gen
-	clojure -M:dev:test:shadow-cljs watch devcards test
+dev: gen
+	clojure -M:demo:test:shadow-cljs watch demo test
 
-.PHONY: release
-release:
-ifdef VERSION
-	clojure -X:jar :version '"$(VERSION)"'
-else
-	$(error Required variable VERSION is not set for target `$@')
-endif
-
-$(GEN_TARGET): mui.edn $(GEN_SRC)
-	clojure -X:gen
+# TODO: This requires 'npm install' after shadow-cljs has created 'package.json'
+$(GEN_TARGET): $(GEN_SRC)
+	clojure -T:build generate
 
 $(TEST_TARGET): $(SRC) $(TEST_SRC) $(GEN_TARGET)
 	clojure -M:test:shadow-cljs compile node-test
 
 $(JAR): $(SRC) $(GEN_TARGET)
-	clojure -X:jar
+	clojure -T:build jar

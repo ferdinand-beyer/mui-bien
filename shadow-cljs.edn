@@ -1,24 +1,19 @@
 {:deps
  {:aliases [:shadow-cljs]}
 
+ :dev-http
+ {8090 {:roots ["target/demo/public" "classpath:public"]}}
+
  :builds
- {:devcards {:target           :browser-test
-             :ns-regexp        "-cards$"
-             :test-dir         "target/devcards"
-             :runner-ns        mui-bien.devcards
-             :compiler-options {:devcards           true
-                                :output-feature-set :es8}
-             :js-options {:resolve {"devcards-marked" {:target :npm
-                                                       :require "marked"}
-                                    "devcards-syntax-highlighter" {:target :npm
-                                                                   :require "highlight.js"}}}
-             :devtools {:http-port 8090
-                        :http-root "target/devcards"}}
+ {:demo {:target :browser
+         :output-dir "target/demo/public/js"
+         :asset-path "/js"
+         :modules {:demo {:init-fn demo.core/init}}}
 
   :test {:target :browser-test
-         :test-dir "build/test/browser"
+         :test-dir "target/test/browser"
          :devtools {:http-port 8091
-                    :http-root "build/test/browser"}}
+                    :http-root "target/test/browser"}}
 
   :node-test {:target :node-test
-              :output-to "build/test/node/run-tests.js"}}}
+              :output-to "target/test/node/run-tests.js"}}}
