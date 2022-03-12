@@ -36,6 +36,10 @@
       "mui-bien"]]]
    [toolbar]])
 
+(defn- menu-subheader [text]
+  [list-subheader {:component :div}
+   text])
+
 (defn- menu-item [name text]
   [list-item-button {:component :a
                      :href (router/href name)
@@ -44,28 +48,33 @@
 
 (defn- menu []
   [list {:component :nav}
-   [menu-item :home "Home"]
-   [list-subheader {:component :div} "Inputs"]
-   [menu-item :buttons "Button"]])
+   [menu-subheader "Inputs"]
+   [menu-item :buttons "Button"]
+   [menu-item :text-fields "Text Field"]])
 
 (defn- menu-drawer [{:keys [open? :on-close]}]
   [drawer {:anchor :left
            :open (boolean open?)
            :on-close on-close}
-   [box {:sx {:width 250} :on-click on-close}
+   [box {:sx {:width 250}
+         :on-click on-close}
+    [link {:href "#/"
+           :variant :h6
+           :underline :none
+           :sx {:p 2}}
+     "mui-bien"]
     [menu]]])
 
-(defn- demo-layout [children]
+(defn- demo-layout [content]
   (r/with-let [drawer-open?   (r/atom false)
                toggle-drawer! (fn [_] (swap! drawer-open? not) nil)]
     [:<>
      [menu-drawer {:open? @drawer-open?
                    :on-close toggle-drawer!}]
      [demo-app-bar {:on-open-menu toggle-drawer!}]
-     [container
-      children]]))
+     [container content]]))
 
-(defn root [children]
+(defn root [content]
   [theme-provider {:theme theme}
    [css-baseline]
-   [demo-layout children]])
+   [demo-layout content]])

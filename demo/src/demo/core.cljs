@@ -1,5 +1,6 @@
 (ns demo.core
   (:require [demo.components.buttons]
+            [demo.components.text-fields]
             [demo.home]
             [demo.base :as base]
             [demo.router :as router]
@@ -14,7 +15,9 @@
 
    ["components"
     ["/buttons" {:name :buttons
-                 :view demo.components.buttons/screen}]]])
+                 :view demo.components.buttons/screen}]
+    ["/text-fields" {:name :text-fields
+                     :view demo.components.text-fields/screen}]]])
 
 (defn- not-found []
   [:main

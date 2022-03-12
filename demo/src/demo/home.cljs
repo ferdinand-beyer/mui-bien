@@ -5,7 +5,7 @@
   [:div
    [typography {:variant :h1}
     "Welcome to mui-bien"]
-   [:ul
-    [:li "Inputs"
-     [:ul
-      [:li [:a {:href "#/components/buttons"} "Button"]]]]]])
+   [:p "Use the menu to explore mui-bien components."]
+   [:p "For a complete reference, visit the "
+    [:a {:href "https://mui.com/"} "Official MUI site"]
+    "."]])
